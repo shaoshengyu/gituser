@@ -1,0 +1,9 @@
+application作用域：application应用域，是程序全局变量，对每个用户每个页面都有效。存放在ServletContext对象中。它的存活时间是最长的，只要服务器开启，如果不进行手工删除，它们就一直可以使用。
+
+session作用域：session会话域，Session是用户全局变量，在整个会话期间都有效。只要页面不关闭就一直有效（或者直到用户一直未活动导致会话过期，默认session过期时间为30分钟，或调用HttpSession的invalidate()方法）。
+
+servletRequest作用域：request请求域生存时间为一次完整请求全过程，即从http请求到服务器处理结束，返回响应的整个过程，存放在HttpServletRequest对象中。在这个过程中可以使用forward方式跳转多个jsp。在这些页面里你都可以使用这个变量。
+
+PageContext作用域：PageContext页面域是范围最小的一个域，仅当前页面有效或在一个jsp页面里有效。
+
+ 
