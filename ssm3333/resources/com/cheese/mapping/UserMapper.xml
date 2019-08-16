@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheese.dao.UserMapper">
+  
+  <insert id="insert" parameterType="com.cheese.pojo.User">
+    insert into tb_user (userId, userName, userPassword, userEmail, userState,userPicture) values (#{userId}, #{userName}, #{userPassword}, #{userEmail}, #{userState},#{userPicture})
+  </insert>
+  
+	<select id="selectUser" parameterType="com.cheese.pojo.User" resultType="com.cheese.pojo.User">
+		select * from tb_user where userName = #{userName} and userPassword = #{userPassword}
+	</select>
+	
+	<select id="selectO" parameterType="com.cheese.pojo.User" resultType="com.cheese.pojo.User">
+		select * from tb_user where userName = #{userName}
+	</select>
+	
+	<select id="selectCount" parameterType="com.cheese.pojo.User" resultType="int">
+		select count(*) from tb_user
+	</select>
+	
+	<select id="findByPage" parameterType="Map" resultType="com.cheese.pojo.User">
+		select * from tb_user limit #{start},#{size}
+	</select>
+	
+	<select id="selectDept" resultMap="dRM">
+	      select d.departmentName,d.departmentQx,u.userName,u.userState from tb_department d,tb_user u
+	      where d.departmentId=u.departmentId and d.departmentId=#{departmentId}
+	</select>
+	<resultMap type="com.cheese.pojo.Department" id="dRM">
+	      <id property ="departmentId" column="departmentId"></id>
+	      <result property="departmentName" column="departmentName"></result>
+	      <result property="departmentQx" column="departmentQx"></result>
+	      <collection property="userList" ofType="com.cheese.pojo.User">
+	        <id property="userId" column="userId"></id>
+	        <result property="userName" column="userName"></result>
+	        <result property="userState" column="userState"></result>
+	      </collection>
+	</resultMap>
+	
+</mapper>
