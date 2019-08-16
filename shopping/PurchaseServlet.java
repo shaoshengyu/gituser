@@ -60,7 +60,7 @@ public class PurchaseServlet extends HttpServlet {
 					int count=pur.get(e);
 					pur.put(e, count+1);
 				}else {
-					//之前未放入该书时
+					//之前未放入该电器时
 					pur.put(e,1);
 				}
 			}
