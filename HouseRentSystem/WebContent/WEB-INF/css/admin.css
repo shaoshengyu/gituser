@@ -1,0 +1,63 @@
+@CHARSET "UTF-8";
+.admin_head{
+	margin: 0px auto; width: auto;height:300px;border:2px solid #ffffff
+}
+.admin_head_left{
+	float:left;margin-left:0px;margin-top:0px;width:30%;height:300px
+}
+label{
+	font-family: "宋体";
+	color: #ff8000;
+	font-size:80px;
+	
+}
+
+.admin_head_right{
+	float:right;margin-right:0px;margin-top:0px;width:70%;height:280px;
+	background-color:#cfb570 ;
+}
+.admin_head_right_top{
+	margin-top:50px;text-align:center
+}
+
+.admin_head_right_bottom{
+	margin-top:100px;text-align:center
+}
+.title01{
+	font-family: "宋体";
+	color: #000000;
+	font-size:30px;
+}
+a{
+	text-decoration:none;
+}
+
+.admin_search{
+	margin:0px auto;width:60%;border:2px solid #c0c0c0;height:150px;text-align:center;
+}
+.message_liuyanmsg{
+	diaplay:block;
+	margin:300px;
+	font-family: "宋体";
+	color: #000000;
+	font-size:30px;
+}
+.admin_body{
+	margin:0px auto;
+	width:60%;
+	font-family: "宋体";
+	color: #000000;
+	font-size:20px;
+	text-align:center;
+	border:4px solid #c0c0c0;
+	height:200px
+}
+.admin_body2{
+	margin:0px auto;
+	width:80%;
+	font-family: "宋体";
+	color: #000000;
+	font-size:20px;
+	text-align:center;
+	height:200px
+}

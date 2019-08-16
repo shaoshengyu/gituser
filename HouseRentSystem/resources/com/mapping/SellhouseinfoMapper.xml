@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.SellhouseinfoMapper">
+	<!-- 通用查询 -->
+	<select id="selectSell" parameterType="com.pojo.Sellhouseinfo" resultType="com.pojo.Sellhouseinfo">
+		select * from sellhouseinfo
+		<trim prefix="where" prefixOverrides="and|or" suffix="order by houseid desc" suffixOverrides="and|or">
+			<if test="houseid!=null and  houseid!=0">
+			   and houseid=#{houseid}
+			</if>
+			<if test="ownerid!=null and  ownerid!=0">
+			   and ownerid=#{ownerid}
+			</if>
+			<if test="mediaid!=null and mediaid!=0">
+				and mediaid=#{mediaid}
+			</if>
+			<if test="createtime!=null ">
+				and createtime=#{createtime}
+			</if>
+			<if test="rentlength!=null and userrole!=''">
+				and rentlength=#{rentlength}
+			</if>
+			<if test="locationprovince!=null and locationprovince!=''">
+				and locationprovince=#{locationprovince}
+			</if>
+			<if test="locationcity!=null and locationcity!=''">
+				and locationcity=#{locationcity}
+			</if>
+			<if test="locationqu!=null and locationqu!=''">
+				and locationqu=#{locationqu}
+			</if>
+			<if test="space!=null and space!=''">
+				and space=#{space}
+			</if>
+			<if test="housestatus!=null and housestatus!=''">
+				and housestatus=#{housestatus}
+			</if>
+			<if test="houseimage!=null and houseimage!=''">
+				and houseImage=#{houseimage}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 插入通用 -->
+  	<insert id="insertSell"  parameterType="com.pojo.Sellhouseinfo">
+  		<!-- 先使用selectKey元素定义主键，然后再定义SQL语句 -->
+		<selectKey keyProperty="houseid" resultType="Integer" order="BEFORE">
+	  	 	select ifnull(max(houseid)+1,401)  from sellhouseinfo
+		</selectKey>
+  		insert into sellhouseinfo(houseid,ownerid,mediaid,createtime,rentlength,locationprovince,locationcity,locationqu,space,housestatus,houseImage,createtime) 
+  		values(#{houseid},#{ownerid},#{mediaid},#{createtime},#{rentlength},#{locationprovince},#{locationcity},#{locationqu},#{space},#{housestatus},#{houseimage},#{createtime})
+  	</insert>
+  	
+  	<!-- 更新通用 -->
+  	<!-- update trim -->
+	<update id="updateSell"  parameterType="com.pojo.Sellhouseinfo" >
+		update sellhouseinfo 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="ownerid!=null and  ownerid!=0">
+			   ownerid=#{ownerid},
+			</if>
+			<if test="mediaid!=null and mediaid!=0">
+				mediaid=#{mediaid},
+			</if>
+			<if test="createtime!=null ">
+				createtime=#{createtime},
+			</if>
+			<if test="rentlength!=null and userrole!=''">
+				rentlength=#{rentlength},
+			</if>
+			<if test="locationprovince!=null and locationprovince!=''">
+				locationprovince=#{locationprovince},
+			</if>
+			<if test="locationcity!=null and locationcity!=''">
+				locationcity=#{locationcity},
+			</if>
+			<if test="locationqu!=null and locationqu!=''">
+				locationqu=#{locationqu},
+			</if>
+			<if test="space!=null and space!=''">
+				space=#{space},
+			</if>
+			<if test="housestatus!=null and housestatus!=''">
+				housestatus=#{housestatus},
+			</if>		
+		</trim>
+		<trim prefix="where" suffixOverrides="and">
+			<if test="houseid!=null and  houseid!=0">
+			  houseid=#{houseid} and
+			</if>
+		</trim>
+	</update>
+	
+	<!-- 通用的删除 -->
+	<delete id="deleteSell"   parameterType="com.pojo.Sellhouseinfo">
+		delete from sellhouseinfo  
+		<trim prefix="where" suffixOverrides=",">
+			<if test="houseid!=null and  houseid!=0">
+			  houseid=#{houseid},
+			</if>
+			<if test="ownerid!=null and  ownerid!=0">
+			   ownerid=#{ownerid},
+			</if>
+			<if test="mediaid!=null and mediaid!=0">
+				mediaid=#{mediaid},
+			</if>
+			<if test="createtime!=null ">
+				createtime=#{createtime},
+			</if>
+			<if test="rentlength!=null and userrole!=''">
+				rentlength=#{rentlength},
+			</if>
+			<if test="locationprovince!=null and locationprovince!=''">
+				locationprovince=#{locationprovince},
+			</if>
+			<if test="locationcity!=null and locationcity!=''">
+				locationcity=#{locationcity},
+			</if>
+			<if test="locationqu!=null and locationqu!=''">
+				locationqu=#{locationqu},
+			</if>
+			<if test="space!=null and space!=''">
+				space=#{space},
+			</if>
+			<if test="housestatus!=null and housestatus!=''">
+				housestatus=#{housestatus},
+			</if>
+			<if test="houseImage!=null and houseImage!=''">
+				houseImage=#{houseimage},
+			</if>
+		</trim>
+	</delete>
+
+</mapper>

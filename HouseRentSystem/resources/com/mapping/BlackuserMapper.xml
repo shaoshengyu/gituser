@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.BlackuserMapper">
+  	<select id="selectBlack" parameterType="com.pojo.Blackuser" resultType="com.pojo.Blackuser">
+		select * from blackuser
+		<trim prefix="where" prefixOverrides="and|or" suffix="order by blackid desc" suffixOverrides="and|or">
+			<if test="blackid!=null and  blackid!=0">
+			   and blackid=#{blackid}
+			</if>
+			<if test="userid!=null and userid!=0">
+				and userid=#{userid}
+			</if>
+			<if test="createtime!=null">
+				and createtime=#{createtime}
+			</if>
+			<if test="description!=null and description!=''">
+				and description=#{description}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 插入通用 -->
+  	<insert id="insertBlack"  parameterType="com.pojo.Blackuser">
+  		<!-- 先使用selectKey元素定义主键，然后再定义SQL语句 -->
+		<selectKey keyProperty="blackid" resultType="Integer" order="BEFORE">
+	  	 	select ifnull(max(blackid)+1,501)  from blackuser
+		</selectKey>
+  		insert into blackuser(blackid,userid,createtime,description) 
+  		values(#{blackid},#{userid},#{createtime},#{description})
+  	</insert>
+  	
+  	<!-- 更新通用 -->
+  	<!-- update trim -->
+	<update id="updateBlack"  parameterType="com.pojo.Blackuser" >
+		update blackuser 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="blackid!=null and  blackid!=0">
+			    blackid=#{blackid},
+			</if>
+			<if test="userid!=null and userid!=0">
+				 userid=#{userid},
+			</if>
+			<if test="createtime!=null">
+				 createtime=#{createtime},
+			</if>
+			<if test="description!=null and description!=''">
+				description=#{description},
+			</if>
+			
+		</trim>
+		<trim prefix="where" suffixOverrides=",">
+			<if test="blackid!=null and  blackid!=0">
+			    blackid=#{blackid},
+			</if>
+			<if test="userid!=null and userid!=0">
+				 userid=#{userid},
+			</if>
+			<if test="createtime!=null">
+				 createtime=#{createtime},
+			</if>
+			<if test="description!=null and description!=''">
+				description=#{description},
+			</if>
+		</trim>
+	</update>
+	
+	<!-- 通用的删除 -->
+	<delete id="deleteBlack"   parameterType="com.pojo.Blackuser">
+		delete from blackuser  
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="blackid!=null and  blackid!=0">
+			  and blackid=#{blackid}
+			</if>
+			<if test="userid!=null and userid!=0">
+			  and userid=#{userid}
+			</if>
+			<if test="createtime!=null">
+			  and createtime=#{createtime}
+			</if>
+			<if test="description!=null and description!=''">
+			  and description=#{description}
+			</if>
+		</trim>
+	</delete>
+
+  	
+  	
+</mapper>

@@ -1,0 +1,33 @@
+@CHARSET "UTF-8";
+a{
+	text-decoration:none;
+}
+.IndexpageContent{
+	margin: 0px auto;
+}
+.Indexpageright{
+	float:right;margin: 20% auto;
+	width:30%;
+	height:auto;
+
+}
+.link{
+	margin: 0 auto;font-family: "宋体";
+	color: #ff0000;
+	font-size:50px
+}
+.Indexpageleft{
+	float:left;margin:0 auto;width:50%;
+	height:auto;padding: 1em; /* column-count: */;column-gap: 1em;
+}
+
+label{
+	font-family: "宋体";
+	color: #ff0000;
+	font-size:50px
+}
+p{
+	font-family: "宋体";
+	color: #0000ff;
+	font-size:30px
+}

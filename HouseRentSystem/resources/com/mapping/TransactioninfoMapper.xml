@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.TransactioninfoMapper">
+ <!-- 查询通用 -->
+	<select id="selectTransaction" parameterType="com.pojo.Transactioninfo" resultType="com.pojo.Transactioninfo">
+		select * from transactioninfo
+		<trim prefix="where" prefixOverrides="and|or" suffix="order by transid desc" suffixOverrides="and|or">
+			<if test="transid!=null and  transid!=0">
+			   and transid=#{transid}
+			</if>
+			<if test="customid!=null and  customid!=0">
+			   and customid=#{customid}
+			</if>
+			<if test="mediaid!=null and mediaid!=0">
+				and mediaid=#{mediaid}
+			</if>
+			<if test="ownerid!=null and ownerid!=0">
+				and ownerid=#{ownerid}
+			</if>
+			<if test="houseid!=null and houseid!=0">
+				and houseid=#{houseid}
+			</if>
+			<if test="transtatus!=null and transtatus!=''">
+				and transtatus=#{transtatus}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 插入通用 -->
+  	<insert id="insertTransaction"  parameterType="com.pojo.Transactioninfo">
+  		<!-- 先使用selectKey元素定义主键，然后再定义SQL语句 -->
+		<selectKey keyProperty="transid" resultType="Integer" order="BEFORE">
+	  	 	select ifnull(max(transid)+1,301)  from transactioninfo
+		</selectKey>
+  		insert into transactioninfo(transid,customid,mediaid,ownerid,houseid,transtatus) 
+  		values(#{transid},#{customid},#{mediaid},#{ownerid},#{houseid},#{transtatus})
+  	</insert>
+  	
+  	<!-- 更新通用 -->
+  	<!-- update trim -->
+	<update id="updateTransaction"  parameterType="com.pojo.Transactioninfo" >
+		update transactioninfo 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="transid!=null and  transid!=0">
+			  transid=#{transid},
+			</if>
+			<if test="customid!=null and customid!=0">
+				customid=#{customid},
+			</if>
+			<if test="mediaid!=null and mediaid!=0">
+				mediaid=#{mediaid},
+			</if>
+			<if test="ownerid!=null and ownerid!=0">
+				ownerid=#{ownerid},
+			</if>
+			<if test="houseid!=null and houseid!=0">
+				houseid=#{houseid},
+			</if>
+			<if test="transtatus!=null and transtatus!=''">
+				transtatus=#{transtatus},
+			</if>
+			
+		</trim>
+		<trim prefix="where" suffixOverrides=",">
+			<if test="transid!=null and  transid!=0">
+			  transid=#{transid},
+			</if>
+			<if test="customid!=null and customid!=0">
+				customid=#{customid},
+			</if>
+			<if test="mediaid!=null and mediaid!=0">
+				mediaid=#{mediaid},
+			</if>
+			<if test="ownerid!=null and ownerid!=0">
+				ownerid=#{ownerid},
+			</if>
+			<if test="houseid!=null and houseid!=0">
+				houseid=#{houseid},
+			</if>
+			<if test="transtatus!=null and transtatus!=''">
+				transtatus=#{transtatus},
+			</if>
+		</trim>
+	</update>
+	
+	<!-- 通用的删除 -->
+	<delete id="deleteTransaction"   parameterType="com.pojo.Transactioninfo">
+		delete from transactioninfo  
+		<trim prefix="where">
+			<if test="transid!=null and  transid!=0">
+			  transid=#{transid},
+			</if>
+			<if test="customid!=null and customid!=0">
+				customid=#{customid},
+			</if>
+			<if test="mediaid!=null and mediaid!=0">
+				mediaid=#{mediaid},
+			</if>
+			<if test="ownerid!=null and ownerid!=0">
+				ownerid=#{ownerid},
+			</if>
+			<if test="houseid!=null and houseid!=0">
+				houseid=#{houseid},
+			</if>
+			<if test="transtatus!=null and transtatus!=''">
+				transtatus=#{transtatus},
+			</if>
+		</trim>
+	</delete>
+</mapper>

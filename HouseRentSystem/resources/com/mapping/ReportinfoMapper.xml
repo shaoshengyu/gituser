@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.ReportinfoMapper">
+	<!-- 通用查询 -->
+	<select id="selectReport" parameterType="com.pojo.Reportinfo" resultType="com.pojo.Reportinfo">
+		select * from reportinfo
+		<trim prefix="where" prefixOverrides="and|or" suffix="order by reportid desc" suffixOverrides="and|or">
+			<if test="reportid!=null and  reportid!=0">
+			   and reportid=#{reportid}
+			</if>
+			<if test="customid!=null and  customid!=0">
+			   and customid=#{customid}
+			</if>
+			<if test="ownerid!=null and  ownerid!=0">
+			   and ownerid=#{ownerid}
+			</if>
+			<if test="mediaid!=null and  mediaid!=0">
+			   and mediaid=#{mediaid}
+			</if>
+			<if test="description!=null and  description!=''">
+			   and description=#{description}
+			</if>
+			</trim>
+	</select>
+	
+	<!-- 插入通用 -->
+  	<insert id="insertReport"  parameterType="com.pojo.Reportinfo">
+  		<!-- 先使用selectKey元素定义主键，然后再定义SQL语句 -->
+		<selectKey keyProperty="reportid" resultType="Integer" order="BEFORE">
+	  	 	select ifnull(max(reportid)+1,201)  from reportinfo
+		</selectKey>
+		insert into reportinfo(reportid,customid,ownerid,mediaid,description)
+		values(#{reportid},#{customid},#{ownerid},#{mediaid},#{description})
+	</insert>
+	
+	<!-- 更新通用 -->
+  	<!-- update trim -->
+	<update id="updateReport"  parameterType="com.pojo.Reportinfo" >
+		update reportinfo 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="reportid!=null and  reportid!=0">
+			    reportid=#{reportid},
+			</if>
+			<if test="customid!=null and  customid!=0">
+			    customid=#{customid},
+			</if>
+			<if test="ownerid!=null and  ownerid!=0">
+			    ownerid=#{ownerid},
+			</if>
+			<if test="mediaid!=null and  mediaid!=0">
+			   mediaid=#{mediaid},
+			</if>
+			<if test="description!=null and  description!=''">
+			    description=#{description},
+			</if>
+		</trim>
+		
+		<trim prefix="where" suffixOverrides=",">
+			<if test="reportid!=null and  reportid!=0">
+			   reportid=#{reportid},
+			</if>
+			<if test="customid!=null and  customid!=0">
+			   customid=#{customid},
+			</if>
+			<if test="ownerid!=null and  ownerid!=0">
+			   ownerid=#{ownerid},
+			</if>
+			<if test="mediaid!=null and  mediaid!=0">
+			   mediaid=#{mediaid},
+			</if>
+			<if test="description!=null and  description!=''">
+			   description=#{description},
+			</if>
+		</trim>
+	</update>
+	
+	<!-- 通用的删除 -->
+	<delete id="deleteReport"   parameterType="com.pojo.Reportinfo">
+		delete from reportinfo
+		<trim prefix="where"  suffixOverrides=",">
+			<if test="reportid!=null and  reportid!=0">
+			   reportid=#{reportid},
+			</if>
+			<if test="customid!=null and  customid!=0">
+			    customid=#{customid},
+			</if>
+			<if test="ownerid!=null and  ownerid!=0">
+			    ownerid=#{ownerid},
+			</if>
+			<if test="mediaid!=null and  mediaid!=0">
+			    mediaid=#{mediaid},
+			</if>
+			<if test="description!=null and  description!=''">
+			    description=#{description},
+			</if>
+		</trim>
+	</delete>
+	
+	
+</mapper>

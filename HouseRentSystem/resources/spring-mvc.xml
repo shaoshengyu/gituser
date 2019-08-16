@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans 
+ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+ http://www.springframework.org/schema/context 
+ http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+ http://www.springframework.org/schema/mvc 
+ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+  <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
+  <context:component-scan base-package="com.controller" />
+  <mvc:annotation-driven/>   
+      
+  <!-- 定义跳转的文件的前后缀，视图模式配置-->
+   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+    p:prefix="/WEB-INF/views/" p:suffix=".jsp" >
+      <property name="order" value="1"/>
+    </bean>
+    
+    <!-- 静态资源的配置 -->
+    <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
+    <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
+    <mvc:resources location="/WEB-INF/picture/" mapping="/picture/**"/>
+    <mvc:resources location="/WEB-INF/views/" mapping="/views/**"/>
+    
+    
+     <!-- 配置拦截器 -->
+  	<mvc:interceptors>
+  		<mvc:interceptor>
+  			 <mvc:mapping path="/" />  
+            <mvc:mapping path="/test/**"/>
+  			<!-- 定义在<mvc:interceptor>元素中，表示匹配指定路径的请求才进行拦截 -->
+  			<bean class="com.interceptor.LoginInteceptor"/>
+  		</mvc:interceptor>
+  	</mvc:interceptors>
+    
+    
+    <!-- 配置MultipartResolver 用于文件上传 使用spring的CommosMultipartResolver -->  
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"  
+        p:defaultEncoding="UTF-8"  
+        p:maxUploadSize="5400000"  
+        p:uploadTempDir="fileUpload/temp" > 
+    </bean>  
+    
+</beans>

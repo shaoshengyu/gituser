@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.MessageinfoMapper">
+ 
+ 	<!-- 通用查询 -->
+	<select id="selectMessage" parameterType="com.pojo.Messageinfo" resultType="com.pojo.Messageinfo">
+		select * from messageinfo
+		<trim prefix="where" prefixOverrides="and|or" suffix="order by messageid desc" suffixOverrides="and|or">
+			<if test="messageid != null and  messageid!=0">
+        		and messageid = #{messageid}
+      		</if>
+			<if test="mediaid != null and  mediaid!=0">
+        		and mediaid = #{mediaid}
+      		</if>
+      		<if test="description != null and  description!=''">
+        		and description = #{description}
+     		</if>
+      		<if test="createtime != null ">
+        		and createtime = #{createtime}
+     		</if>
+      		<if test="status != null and  status!=''">
+       			and status = #{status}
+     	    </if>
+		</trim>
+	</select>
+	
+	<!-- 插入通用 -->
+  	<insert id="insertMessage"  parameterType="com.pojo.Messageinfo">
+  		<!-- 先使用selectKey元素定义主键，然后再定义SQL语句 -->
+		<selectKey keyProperty="messageid" resultType="Integer" order="BEFORE">
+	  	 	select ifnull(max(messageid)+1,601)  from messageinfo
+		</selectKey>
+  		insert into messageinfo(messageid,mediaid,description,createtime,status,userid) 
+  		values(#{messageid},#{mediaid},#{description},#{createtime},#{status},#{userid})
+  	</insert>
+	
+	<!-- 更新通用 -->
+  	<!-- update trim -->
+	<update id="updateMessage"  parameterType="com.pojo.Messageinfo" >
+		update messageinfo 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="mediaid != null and  mediaid!=0">
+        		 mediaid = #{mediaid},
+      		</if>
+      		<if test="description != null and  description!=''">
+        		 description = #{description},
+     		</if>
+      		<if test="createtime != null ">
+        		createtime = #{createtime},
+     		</if>
+      		<if test="status != null and  status!=''">
+       			status = #{status},
+     	    </if>
+		</trim>
+		where  messageid = #{messageid}
+	</update>
+	
+	<!-- 通用的删除 -->
+	<delete id="deleteMessage"   parameterType="com.pojo.Messageinfo">
+		delete from messageinfo 
+		<trim prefix="where"  suffixOverrides=",">
+			<if test="messageid != null and  messageid!=0">
+        		 messageid = #{messageid},
+      		</if>
+			<if test="mediaid != null and  mediaid!=0">
+        		 mediaid = #{mediaid},
+      		</if>
+      		<if test="description != null and  description!=''">
+        		 description = #{description},
+     		</if>
+      		<if test="createtime != null ">
+        		createtime = #{createtime},
+     		</if>
+      		<if test="status != null and  status!=''">
+       			status = #{status},
+     	    </if>
+		</trim>
+	</delete>
+ </mapper>

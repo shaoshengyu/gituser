@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.UserinfoMapper">
+	<!-- 查询通用 -->
+	<select id="selectUser" parameterType="com.pojo.Userinfo" resultType="com.pojo.Userinfo">
+		select * from userinfo
+		<trim prefix="where" prefixOverrides="and|or" suffix="order by userid desc" suffixOverrides="and|or">
+			<if test="userid!=null and  userid!=0">
+			    userid=#{userid}
+			</if>
+			<if test="username!=null and  username!=''">
+			   and username=#{username}
+			</if>
+			<if test="userpassword!=null and userpassword!=''">
+				and userpassword=#{userpassword}
+			</if>
+			<if test="useremail!=null and useremail!=''">
+				and useremail=#{useremail}
+			</if>
+			<if test="userrole!=null and userrole!=''">
+				and userrole=#{userrole}
+			</if>
+			<if test="userstatus!=null and userstatus!=''">
+				and userstatus=#{userstatus}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 插入通用 -->
+  	<insert id="insertUser"  parameterType="com.pojo.Userinfo">
+  		<!-- 先使用selectKey元素定义主键，然后再定义SQL语句 -->
+		<selectKey keyProperty="userid" resultType="Integer" order="BEFORE">
+	  	 	select ifnull(max(userid)+1,101)  from userinfo
+		</selectKey>
+  		insert into userinfo(userid,username,userpassword,userphone,useremail,userIdentity,userCredit,userRole,userImage,userstatus) 
+  		values(#{userid},#{username},#{userpassword},#{userphone},#{useremail},#{useridentity},#{usercredit},#{userrole},#{userimage},#{userstatus})
+  	</insert>
+  	
+  	<!-- 更新通用 -->
+  	<!-- update trim -->
+	<update id="updateUser"  parameterType="com.pojo.Userinfo" >
+		update userinfo 
+		<trim prefix="set" >
+			<if test="userpassword!=null and userpassword!=''">
+				userpassword=#{userpassword}
+			</if>
+			<if test="usercredit!=null and usercredit!=0">
+				usercredit=#{usercredit}
+			</if>
+			<if test="userimage!=null and userimage!=''">
+				userimage=#{userimage}
+			</if>
+			<if test="userphone!=null and userphone!=''">
+				userphone=#{userphone}
+			</if>
+			<if test="userstatus!=null and userstatus!=''">
+				userstatus=#{userstatus}
+			</if>
+			<if test="userrole!=null and userrole!=''">
+				userrole=#{userrole}
+			</if>
+		</trim>
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="username!=null &amp;&amp; username.length>0 ">
+			 	and username=#{username}
+			</if>
+			<if test="useremail!=null &amp;&amp;useremail.length>0 ">
+				and useremail=#{useremail}
+			</if>
+			<if test="userid!=null and userid!=0">
+			  and userid=#{userid}
+			</if>
+		</trim>
+	</update>
+
+	<!-- 通用的删除 -->
+	<delete id="deleteUser"   parameterType="com.pojo.Userinfo">
+		delete from userinfo  
+		<trim prefix="where" suffixOverrides=",">
+			<if test="userid!=null and userid!=0">
+			  userid=#{userid},
+			</if>
+			<if test="username!=null and  username!=''">
+			  username=#{username},
+			</if>
+			<if test="userpassword!=null and userpassword!=''">
+				userpassword=#{userpassword},
+			</if>
+			<if test="userphone!=null and userphone!=''">
+				userphone=#{userphone},
+			</if>
+			<if test="useremail!=null and useremail!=''">
+				useremail=#{useremail},
+			</if>
+			<if test="useridentity!=null and useridentity!=''">
+				useridentity=#{useridentity},
+			</if>
+			<if test="usercredit!=null and usercredit!=0">
+				usercredit=#{usercredit},
+			</if>
+			<if test="userrole!=null and userrole!=''">
+				userrole=#{userrole},
+			</if>
+			<if test="userimage!=null and userimage!=''">
+				userimage=#{userimage},
+			</if>
+			<if test="userstatus!=null and userstatus!=''">
+				userstatus=#{userstatus}
+			</if>
+		</trim>
+	</delete>
+  	
+  	
+</mapper>
