@@ -1,0 +1,90 @@
+CSS文字样式
+单位
+px 像素
+em 字符
+%  百分比
+<p>标签不设置样式则默认120%*12px
+若设置div字体大小12px
+<div>
+<h1></h1>
+<p></p>
+</div>
+受HTML DOM树继承关系，<h1>和<p>标签内容大小为12px
+
+颜色
+red,blue,green
+RGB为红色,蓝色,绿色在黑色下调色
+reg(x,x,x):RGB值,每个颜色分量取0-255:
+红色:rgb(255,0,0),灰色:rgb(66,66,66)(三种颜色分量一样),黑色(0,0,0)
+rgb(x%,x%,x%):RGB百分比值0-100%,如红色rgb(100%,0%,0%)
+rgba(x,x,x,x):RGB值,透明度(最后一位)
+a值(透明度):0.0(完全透明)-1.0(完全不透明) 
+#rrggbb:十六进制数,如红色:#ff00(#ff0000去掉了重复位)
+
+文本
+属性              描述         取值
+color             文本颜色     red #ff00 rgb,rgba
+letter-spacing    字符间距     2px  -3px(负数时会产生重叠效果)
+line-height       行高         14px 1.5em 120%(将line-height与height设置的一样就能垂直居中)
+text-align        对齐         center(居中)  left  right  justify(两端对齐)
+text-decoration   装饰线       none(无装饰线）  overline  underline(下划线)  line-through(删除线)
+可设置a{text-decoration:none;}，将超链接下划线删除。
+text-indent       首行缩进     2em
+
+字体
+font(属性)在一个声明中设置所有字体的属性
+font:bold 18px '幼圆'
+font-family(字体系列): "HiraginoSans GB"(有空格要加引号),sans-serif；
+font-size(字号)  font-style:italic(斜体)  font-weight(粗体):bold 
+简化font(必须拥有所有属性)
+font:斜体   粗体  字号/行高   字体;
+font:italic bold  16px/1.5em  '宋体';
+
+
+css背景样式
+background空元素要先定义元素的高度和宽度
+height:30px;
+width:600px;
+background-color:rgb(未显示图片则显示颜色)
+background-image:url("logo.jpg")
+background-repeat:repeat(全部填充),repeat-x(横向),repeat-y(纵向),no-repeat(填充一次)
+background:颜色 图片 repeat;
+
+
+css超链接样式(都设置则按以下顺序编写)
+a{
+    font-size:22px;
+}
+a:link{
+    text-decoration:none;
+	color:#09f; /*未访问*/
+}
+a:visited{
+    text-decoration:none;
+	color:#930; /*已访问*/
+}
+a:hover{
+    text-decoration:underline;
+	font-size:120%;(字体放大,简单同态效果)
+	color:#03c; /*鼠标悬停*/
+}
+a:active{
+    text-decoration:none;
+    color:#03c; /*按下鼠标*/
+}
+
+
+列表表格样式
+css列表样式ul与ol公用
+list-style:所有用于列表的属性设置于一个声明中
+list-style-image:设置列表项标志的图像
+list-style-position:标志的位置(inside向右缩进/outside向左缩进)
+list-style-type:标志的类型
+
+css表格样式table
+border-collapse:collapse;合并表格边框
+:ntn-child(odd|even)奇偶选择器
+tr:nth-child(odd)每行交替显示颜色
+
+
+
