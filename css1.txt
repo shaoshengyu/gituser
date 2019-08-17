@@ -1,0 +1,151 @@
+CSS层叠样式表
+内容和样式相分离，便于修改样式。
+
+
+CSS语法
+<p>XXXXX</p>(html中)
+CSS中
+p(选择器，此处选择html中<p>标签){
+    font-size:12px;     /*字号*/
+    color:blue;         /*文字颜色*/
+    font-weight:bold;   /*加粗*/
+	属性名:属性值;      /*注释，可跨行*/
+}	
+
+
+css添加方法
+
+(1)行内: 
+<body>
+<p style="color:red;">XXX</p>
+</body>
+
+(2)内嵌样式: (适合文件少，css代码也不多的情况)
+<head>
+  <style type=:text/css">
+   p{
+       color:red;
+	}
+  </style>
+</head>
+<body>
+  <p>XXX</p>
+</body>
+
+(3)单独文件(外联样式表文件)
+现有css文件夹与1.html和2.html处于同一文件夹，css文件夹中有style.css
+style.css外联样式表文件
+p{
+color:
+}
+1.html网页文件
+<head>
+  <link rel="stylesheet"(连接文件的类型) href="css/style.css"(文件相对路径) />
+</head>
+<body>
+  <p>XXX</p>
+</body>
+</head>
+
+优先级：
+多重样式可以层叠，可以覆盖
+样式的优先按照就近原则
+行内样式>内嵌样式>连接样式>浏览器默认样式
+例子:
+外联样式表文件
+h3{
+color:red
+text-align:left;
+font-size:8pt;
+}
+内嵌样式
+h3{
+text-align:right;
+font-size:20pt
+}
+
+html中h3得到的样式
+clor"red;
+text-aligen:right;
+font-size:20pt;
+
+
+CSS选择器
+
+标签选择器
+<style type="text/css">
+  body{background-color:#ccc;(背景灰色)
+  text-align:center(居中)
+  font-size:12px}
+  h1{font:"黑体",font-size:20px;}
+  p{color:red;}
+  hr{width:200px;}
+<style>
+
+类别选择器
+css文件
+p  { font-size:12px;}
+ .one{font-size:18px;}(注意one前面要加点)
+ .two{font-size:24px;}
+html文件
+<body>
+  <p class="one">18px</p>(注意one前面不要加点)
+  <p class="one">18px</p>
+  <p class="two">24px</p>
+  <p class="two">24px</p>
+  <p>12px</p>
+</body>
+
+ID选择器(与class的区别在于唯一性)
+css文件
+ #one{font-size:12px;}
+ #two{font-size:24px;}
+html文件
+<body>
+  <p id="one">12px</p>
+  <p id="two">24px</p>
+</body>
+
+嵌套声明
+css文件
+p span{color:red;}(用空格隔断标签)
+html文件
+<body>
+<p><span>红色的字</span>XXXX</p>
+</body>
+
+集体声明
+css文件
+h1,p{text-align:center;}(用,隔断标签)
+html文件
+<body>
+ <h1>居中的字</h1>
+ <p>居中的字</p>
+<body>
+
+全局声明
+css文件
+*{
+   text-align:center
+}
+html文件
+<body>
+所有未就近设置其他样式的标签内容居中
+<body>
+
+混合
+id选择器不可多个同时使用。
+可同时使用一个id选择器和多个class选择器。
+css文件
+#my{}
+.one{}
+.yellow{}
+.left{}
+html文件
+<div id="my" class="one yellow left">......<div>
+
+
+
+
+
+
