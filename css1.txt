@@ -22,7 +22,7 @@ css添加方法
 
 (2)内嵌样式: (适合文件少，css代码也不多的情况)
 <head>
-  <style type=:text/css">
+  <style type="text/css">
    p{
        color:red;
 	}
