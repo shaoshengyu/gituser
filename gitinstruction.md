@@ -1,17 +1,15 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 <h1>常用的一些git指令</h1>
-```
-mkdir <filename>    ——创建一个文件夹(空目录)   假设filename为learngit
-cd                  ——进入某文件夹目录
-ls                    ——查看所在目录的所有文件
-cat readme.txt        ——查看文件内容
-vi readme.txt      ——进入文件编辑界面
-            1、按i进入编辑模式，此时界面右下角显示insert
-            2、编辑完按esc推出insert模式
-            3、按shift + ：（shift + 冒号键）输入wq。  ps：wq表示保存并退出，只有q表示只退出
-            4、最后按enter键退出界面
-rm readme.txt       ——删除文件
-pwd                 ——用于显示当前目录
+mkdir <filename>    ——创建一个文件夹(空目录)   假设filename为learngit<br />
+cd                  ——进入某文件夹目录<br />
+ls                    ——查看所在目录的所有文件<br />
+cat readme.txt        ——查看文件内容<br />
+vi readme.txt      ——进入文件编辑界面<br />
+            1、按i进入编辑模式，此时界面右下角显示insert<br />
+            2、编辑完按esc推出insert模式<br />
+            3、按shift + ：（shift + 冒号键）输入wq。  ps：wq表示保存并退出，只有q表示只退出<br />
+            4、最后按enter键退出界面<br />
+rm readme.txt       ——删除文件<br />
+pwd                 ——用于显示当前目录<br />
 
 初始化仓库
 git  init                      ——初始化一个Git仓库
@@ -80,10 +78,12 @@ git diff          ——查看difference，若git status提示文件被修改过
 分支合并冲突，把合并失败的文件手动修改再提交。
 
 分支管理策略，平时不在master分支干活，master只用于发布
-         2人以下在dev分支工作，2人以上在dev分支的基础上再建立feature分支上工作
+         
+		 2人以下在dev分支工作，2人以上在dev分支的基础上再建立feature分支上工作
          普通模式合并有历史分支  在分支上git add file和git commit -m ""，转回上一分支 git merge --no--ff -m "" dev(或者feature)
 
-bug分支   突然遇到要修改的bug，将当前dev分支的工作储藏  git stash		
+bug分支   
+          突然遇到要修改的bug，将当前dev分支的工作储藏  git stash		
           然后转到要修复的分支  git checkout bug分支
 		  在bug分支创建临时修改分支  git checkout -b issue-101
 		  完成修复并git add file， git commit -m "fix bug 101"(假设这步版本号为为4c80512)
@@ -102,5 +102,4 @@ Feature分支 feature-v分支修改完毕但未合并，突然需求变化不再
 查看具体信息      git remote -v
 推送分支          git push master/dev/feature
 
-将本地未push的分叉整理成直线  git rebase
-```	  
+将本地未push的分叉整理成直线  git rebase 
