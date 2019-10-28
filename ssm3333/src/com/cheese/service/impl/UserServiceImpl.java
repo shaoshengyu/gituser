@@ -6,9 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.chainsaw.Main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.druid.sql.dialect.oracle.ast.clause.ModelClause.MainModelClause;
 import com.cheese.dao.UserMapper;
 import com.cheese.pojo.Department;
 import com.cheese.pojo.PageBean;
@@ -58,7 +60,7 @@ public class UserServiceImpl implements UserService {
 			//封装总记录数
 			int totalCount = userMapper.selectCount();
 			pageBean.setTotalCount(totalCount);
-			
+
 			//封装总页数
 			double tc = totalCount;
 	        Double num =Math.ceil(tc/pageSize);//向上取整

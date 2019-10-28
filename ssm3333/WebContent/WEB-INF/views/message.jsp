@@ -62,7 +62,5 @@
             当前第<span id="pageNo"></span> 页 ,
             总页数:<span id="totalPage"> </span>,
             总条数:<span id="totalCount"></span>
-
 </body>
-
 </html>
